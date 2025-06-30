@@ -1,0 +1,43 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube AddBlock Extension",
+    "version": "1.0.1",
+    "description": "bloqueur de pubs YouTube",
+    "permissions": [
+      "scripting",
+      "activeTab",
+      "declarativeNetRequest",
+      "storage",
+      "tabs"
+    ],
+    "host_permissions": [
+      "*://*.youtube.com/*",
+      "*://*.doubleclick.net/*",
+      "*://*.googlevideo.com/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icons/icon.png"
+    },
+    "icons": {
+      "48": "icons/icon.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://www.youtube.com/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "block-ads",
+          "enabled": true,
+          "path": "rules.json"
+        }
+      ]
+    }
+}  
